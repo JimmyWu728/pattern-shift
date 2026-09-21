@@ -20,17 +20,15 @@
 <section id="intro" class="screen on center">
 <div class="mark">PS</div><div class="ey" style="margin-top:24px">Decision & Personality</div>
 <h1>你現在的行動方式，<br>和以前一樣嗎？</h1>
-<p>這是一個關於人格變化與決策模式的互動測驗。沒有標準答案，請選最接近你真實反應的選項。</p>
-<div class="box"><strong>回答方式</strong><p style="margin:0">核心題會依序問「現在的你」與「以前的你」。請依直覺回答，不必追求前後一致。</p></div>
-<div class="sp"></div><button class="cta" onclick="goSetup()">開始</button><div class="note">約 4–6 分鐘｜iPhone 直式操作優先</div>
+<p>這是一個關於人格變化、決策模式與 MBTI 四軸傾向的互動測驗。沒有標準答案，請選最接近你真實反應的選項。</p>
+<div class="box"><strong>回答方式</strong><p style="margin:0">題目會依序問「現在的你」與「以前的你」。前段測四個人格軸，後段測決策取捨；請依直覺回答，不必追求前後一致。</p></div>
+<div class="sp"></div><button class="cta" onclick="goSetup()">開始</button><div class="note">約 5–7 分鐘｜iPhone 直式操作優先</div>
 </section>
 
 <section id="setup" class="screen">
 <div style="margin-top:22px"><div class="ey">Before we start</div><h2>先留下一點背景</h2><p>這些資料只用來描述你的變化。</p></div>
 <div class="stack">
 <div class="field"><label>名字／暱稱（可留白）</label><input id="nm" maxlength="18" placeholder="例如：Alex"></div>
-<div class="field"><label>以前的 MBTI（可留白）</label><input id="mp" maxlength="4" placeholder="例如：INTJ"></div>
-<div class="field"><label>現在的 MBTI（可留白）</label><input id="mn" maxlength="4" placeholder="例如：ENTJ"></div>
 <div class="field"><label>「以前」大約指多久以前？</label><div class="seg"><button id="y3" class="sel" onclick="setPast(3)">約 3 年前</button><button id="y5" onclick="setPast(5)">約 5 年前</button></div></div>
 </div>
 <div class="sp"></div><button class="cta" onclick="start()">進入測驗</button><div class="note">請全程用同一個人生階段理解「以前」。</div>
@@ -47,6 +45,23 @@
 </section>
 
 <section id="processing" class="screen center"><div class="mark">···</div><div class="ey" style="margin-top:24px">Analysis</div><h2>正在整理你的模式</h2><p>比較現在、過去與複驗結果。</p></section>
+
+<section id="mbtiResult" class="screen"><div class="reveal">
+<div class="ey">Personality Shift</div>
+<div class="panel">
+  <div class="pt">MBTI 四軸傾向（非官方量表）</div>
+  <div class="evo">
+    <div><span>以前</span><strong id="mbPastType">—</strong></div>
+    <div class="arrow">→</div>
+    <div><span>現在</span><strong id="mbNowType">—</strong></div>
+  </div>
+</div>
+<div class="panel"><div class="pt">四軸變化</div><div id="mbAxes"></div></div>
+<div class="panel"><div class="pt">變化摘要</div><div id="mbSummary" class="quote">—</div></div>
+<div class="box"><strong>這不是全部。</strong><p style="margin:0">前面的回答還能形成另一層決策風格輪廓。這一層在作答前沒有公開，以降低刻意迎合結果的影響。</p></div>
+<button class="cta" onclick="revealSecondLayer()">查看第二層分析</button>
+<div class="note">MBTI 為四軸傾向推估，不等同官方 MBTI® 測評。</div>
+</div></section>
 
 <section id="result" class="screen"><div class="reveal">
 <div class="ey">Second Layer Unlocked</div>
@@ -74,6 +89,22 @@ D:{name:"具現化系",short:"具現",core:"結構建模",c:"#5d7f9f"},
 E:{name:"操作系",short:"操作",core:"協調與槓桿",c:"#5e8e70"},
 F:{name:"特質系",short:"特質",core:"重定義問題",c:"#94677f"}
 };
+const M=[
+{axis:"EI",a:"I",b:"E",q:"高強度工作幾個小時後，哪種方式更容易讓你恢復？",oa:"先獨處一段時間，把思緒整理回來。",ob:"找人聊聊或一起做點事，從互動中恢復。"},
+{axis:"EI",a:"I",b:"E",q:"進入一個幾乎都不認識人的場合，你通常更像？",oa:"先觀察氣氛與人，再逐步加入。",ob:"主動開口、建立連結，邊互動邊熟悉。"},
+{axis:"SN",a:"S",b:"N",q:"學一個完全陌生的新東西時，你比較容易從哪裡進入？",oa:"先看具體案例、步驟與實際怎麼做。",ob:"先抓整體原理、模型與它可能延伸到哪裡。"},
+{axis:"SN",a:"S",b:"N",q:"評估一個新想法時，你第一個更想確認？",oa:"它是否有足夠具體證據、細節與落地條件。",ob:"它背後的模式是什麼，還可能打開哪些新可能。"},
+{axis:"TF",a:"T",b:"F",q:"兩個方案都可行但團隊意見分裂時，你更依賴什麼做決定？",oa:"一致的原則、因果與可比較的標準。",ob:"這個決定對人、關係與核心價值會造成什麼影響。"},
+{axis:"TF",a:"T",b:"F",q:"你必須指出一個人的明顯問題時，你更優先？",oa:"把問題本身講清楚，避免模糊與誤判。",ob:"調整表達方式，讓對方能接住並願意改變。"},
+{axis:"JP",a:"J",b:"P",q:"接到一個自由度很高、期限一個月的任務，你通常先？",oa:"先定目標、節點與大致路徑，再開始推進。",ob:"先做起來，保留選項，根據過程中的資訊調整。"},
+{axis:"JP",a:"J",b:"P",q:"如果有一天完全沒有既定安排，你更舒服的狀態是？",oa:"至少先有一個大致計畫，知道今天要往哪裡走。",ob:"不先鎖定安排，看當下狀態與機會再決定。"}
+];
+const MT=[
+EI:{axis:"EI",a:"I",b:"E",q:"有一個重要想法剛成形時，你通常先？",oa:"先自己想深一點，等輪廓清楚後再說。",ob:"先找人交換，透過對話讓想法變清楚。"},
+SN:{axis:"SN",a:"S",b:"N",q:"讀一份資訊很多的報告時，你比較容易記住？",oa:"具體數據、事件、步驟與已發生的事。",ob:"背後的關聯、趨勢、原理與可能走向。"},
+TF:{axis:"TF",a:"T",b:"F",q:"一個規則對所有人一致，但讓少數人很吃虧，你更容易先注意？",oa:"規則是否有清楚、一致、可辯護的邏輯。",ob:"規則造成的實際人際與價值後果是否合理。"},
+JP:{axis:"JP",a:"J",b:"P",q:"旅行到一個第一次去的城市，你更偏好？",oa:"先把幾個主要行程與時間框架排好。",ob:"只抓少數必做項目，其餘到現場再決定。"}
+};
 const Q=[
 ["A","B","臨時出現一個沒預期到的障礙，你更自然的第一步是？","先把既有方法做得更扎實，用更穩定的輸出去突破。","先換一種做法，快速試出哪個變化最有效。"],
 ["A","C","事情已經拖了一段時間，你更傾向怎麼推進？","把注意力收回自己能控制的部分，直接提高完成度。","把訊息與行動往外推出去，讓更多人或資源開始反應。"],
@@ -98,14 +129,60 @@ const V=[
 ["C","E","要在很短時間內推動一群人，你更依賴？","清楚、直接、能穿透層級的訊號與表達。","抓住關鍵人物與節點，讓影響沿著結構擴散。"]
 ];
 const ROLES={AB:"適應輸出型",AC:"直接突破型",AD:"精密建構型",AE:"現場統籌型",AF:"目標改寫型",BC:"機動投射型",BD:"模型變奏型",BE:"彈性編排型",BF:"邊界探索型",CD:"外部架構型",CE:"影響傳導型",CF:"破局投射型",DE:"系統運作型",DF:"系統重構型",EF:"規則編排型"};
-let st={past:3,order:[],i:0,time:"now",an:{},ap:{},vi:0,va:[],cons:0,decide:false,decPair:null,decAns:null,result:null,name:""};
+let st={past:3,name:"",mOrder:[],mi:0,mTime:"now",mbNow:{},mbPast:{},mTies:[],mti:0,order:[],i:0,time:"now",an:{},ap:{},vi:0,va:[],cons:0,decide:false,decPair:null,decAns:null,result:null,mbti:null};
 const $=id=>document.getElementById(id), key=(a,b)=>[a,b].sort().join("");
 function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$(id).classList.add("on");scrollTo(0,0)}
 function prog(n){$("prog").style.width=n+"%"}
 function shuffle(a){a=[...a];for(let i=a.length-1;i;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function goSetup(){show("setup");prog(2)}
 function setPast(n){st.past=n;$("y3").classList.toggle("sel",n===3);$("y5").classList.toggle("sel",n===5)}
-function start(){st.name=$("nm").value.trim();st.order=shuffle(Q.map((_,i)=>i));show("quiz");renderCore()}
+function start(){
+st.name=$("nm").value.trim();st.mOrder=shuffle(M.map((_,i)=>i));st.mi=0;st.mTime="now";st.mbNow={};st.mbPast={};show("quiz");renderM()
+}
+function renderM(){
+let qi=st.mOrder[st.mi],m=M[qi],past=st.mTime==="past";
+$("phase").textContent="人格四軸";$("num").textContent=(st.mi+1)+" / 8";
+$("tabs").innerHTML='<div class="pill '+(!past?"sel":"")+'">現在的我</div><div class="pill '+(past?"sel":"")+'">'+st.past+'年前的我</div>';
+$("question").textContent=m.q;$("hint").textContent=past?"用同一情境回答以前的你。":"快速選比較接近的一邊，不必追求完全符合。";
+$("choices").innerHTML="";
+shuffle([[m.a,m.oa],[m.b,m.ob]]).forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>pickM(qi,m.axis,o[0],b);$("choices").appendChild(b)});
+prog(5+((st.mi+(past?.5:0))/8)*22)
+}
+function pickM(qi,axis,pole,b){
+b.classList.add("sel");setTimeout(()=>{
+let k="m"+qi;
+if(st.mTime==="now"){st.mbNow[k]={axis,pole};st.mTime="past";renderM()}
+else{st.mbPast[k]={axis,pole};st.mTime="now";st.mi++;if(st.mi===8)prepareMTies();else renderM()}
+},100)
+}
+function axisCount(ans,axis){
+let z={};for(const v of Object.values(ans)){if(v.axis===axis)z[v.pole]=(z[v.pole]||0)+1}return z
+}
+function prepareMTies(){
+st.mTies=["EI","SN","TF","JP"].filter(ax=>{
+let n=axisCount(st.mbNow,ax),p=axisCount(st.mbPast,ax),a=ax[0],b=ax[1];
+return (n[a]||0)===(n[b]||0)||(p[a]||0)===(p[b]||0)
+});
+st.mti=0;st.mTime="now";
+if(st.mTies.length)renderMTie();else startCore()
+}
+function renderMTie(){
+let ax=st.mTies[st.mti],m=MT[ax],past=st.mTime==="past";
+$("phase").textContent="人格複驗";$("num").textContent=(st.mti+1)+" / "+st.mTies.length;
+$("tabs").innerHTML='<div class="pill '+(!past?"sel":"")+'">現在的我</div><div class="pill '+(past?"sel":"")+'">'+st.past+'年前的我</div>';
+$("question").textContent=m.q;$("hint").textContent="這題只在某個人格軸接近中間時出現。";
+$("choices").innerHTML="";
+shuffle([[m.a,m.oa],[m.b,m.ob]]).forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>pickMTie(ax,m.axis,o[0],b);$("choices").appendChild(b)});
+prog(27+((st.mti+(past?.5:0))/Math.max(1,st.mTies.length))*6)
+}
+function pickMTie(id,axis,pole,b){
+b.classList.add("sel");setTimeout(()=>{
+let k="t"+id;
+if(st.mTime==="now"){st.mbNow[k]={axis,pole};st.mTime="past";renderMTie()}
+else{st.mbPast[k]={axis,pole};st.mTime="now";st.mti++;if(st.mti===st.mTies.length)startCore();else renderMTie()}
+},100)
+}
+function startCore(){st.order=shuffle(Q.map((_,i)=>i));st.i=0;st.time="now";show("quiz");renderCore()}
 function renderCore(){
 let qi=st.order[st.i],q=Q[qi],past=st.time==="past";
 $("phase").textContent="核心取捨";$("num").textContent=(st.i+1)+" / 15";
@@ -113,30 +190,63 @@ $("tabs").innerHTML='<div class="pill '+(!past?"sel":"")+'">現在的我</div><d
 $("question").textContent=q[2];$("hint").textContent=past?"用同一個情境回答以前的你。":"先回答現在的你。";
 let opts=shuffle([[q[0],q[3]],[q[1],q[4]]]);$("choices").innerHTML="";
 opts.forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>pickCore(qi,o[0],b);$("choices").appendChild(b)});
-prog(5+((st.i+(past?.5:0))/15)*66)
+prog(33+((st.i+(past?.5:0))/15)*42)
 }
-function pickCore(qi,k,b){b.classList.add("sel");setTimeout(()=>{if(st.time==="now"){st.an[qi]=k;st.time="past";renderCore()}else{st.ap[qi]=k;st.time="now";st.i++;if(st.i===15){show("checkpoint");prog(72);$("cpbtn").onclick=startVal}else renderCore()}},100)}
+function pickCore(qi,k,b){b.classList.add("sel");setTimeout(()=>{if(st.time==="now"){st.an[qi]=k;st.time="past";renderCore()}else{st.ap[qi]=k;st.time="now";st.i++;if(st.i===15){show("checkpoint");prog(76);$("cpbtn").onclick=startVal}else renderCore()}},100)}
 function startVal(){st.vi=0;st.va=[];show("quiz");renderVal()}
 function renderVal(){
 let v=V[st.vi];$("phase").textContent="情境複驗";$("num").textContent=(st.vi+1)+" / 4";$("tabs").innerHTML='<div class="pill sel">現在的我</div>';
 $("question").textContent=v[2];$("hint").textContent="不要回想前面的答案，照這個情境本身選。";$("choices").innerHTML="";
 shuffle([[v[0],v[3]],[v[1],v[4]]]).forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>{b.classList.add("sel");st.va.push(o[0]);setTimeout(()=>{st.vi++;st.vi===4?afterVal():renderVal()},100)};$("choices").appendChild(b)});
-prog(73+(st.vi/4)*13)
+prog(78+(st.vi/4)*10)
 }
 function scores(ans){let s={A:0,B:0,C:0,D:0,E:0,F:0};Object.values(ans).forEach(k=>s[k]++);return s}
 function afterVal(){
 let m=0;V.forEach((v,i)=>{let qi=Q.findIndex(q=>key(q[0],q[1])===key(v[0],v[1]));if(st.an[qi]===st.va[i])m++});st.cons=m/4;
 let sn=scores(st.an),r=Object.entries(sn).sort((a,b)=>b[1]-a[1]);st.decide=(r[0][1]-r[1][1]<=1)||st.cons<.75;
-if(st.decide){st.decPair=[r[0][0],r[1][0]];$("cpt").textContent="最後再確認 1 題";$("cpp").textContent=st.cons<.75?"你的選擇有明顯情境切換。最後用一題有代價的選擇確認核心偏好。":"你的前兩個傾向非常接近。最後用一題做區分。";show("checkpoint");$("cpbtn").onclick=startDec;prog(88)}else finish()
+if(st.decide){st.decPair=[r[0][0],r[1][0]];$("cpt").textContent="最後再確認 1 題";$("cpp").textContent=st.cons<.75?"你的選擇有明顯情境切換。最後用一題有代價的選擇確認核心偏好。":"你的前兩個傾向非常接近。最後用一題做區分。";show("checkpoint");$("cpbtn").onclick=startDec;prog(90)}else finish()
 }
 function startDec(){
 let a=st.decPair[0],b=st.decPair[1],base=Q.find(q=>key(q[0],q[1])===key(a,b));
 show("quiz");$("phase").textContent="最後確認";$("num").textContent="1 / 1";$("tabs").innerHTML='<div class="pill sel">只能選一個</div>';
 $("question").textContent="如果只能保留其中一種能力，你更不願意放棄哪一個？";$("hint").textContent="沒有折衷選項。";$("choices").innerHTML="";
 let ta=base[0]===a?base[3]:base[4],tb=base[0]===b?base[3]:base[4];
-shuffle([[a,ta],[b,tb]]).forEach(o=>{let x=document.createElement("button");x.className="choice";x.textContent=o[1];x.onclick=()=>{st.decAns=o[0];finish()};$("choices").appendChild(x)});prog(92)
+shuffle([[a,ta],[b,tb]]).forEach(o=>{let x=document.createElement("button");x.className="choice";x.textContent=o[1];x.onclick=()=>{st.decAns=o[0];finish()};$("choices").appendChild(x)});prog(94)
 }
-function finish(){show("processing");prog(96);setTimeout(()=>{let sn=scores(st.an),sp=scores(st.ap);if(st.decAns)sn[st.decAns]+=.5;let rn=Object.entries(sn).sort((a,b)=>b[1]-a[1]),rp=Object.entries(sp).sort((a,b)=>b[1]-a[1]);let growth={};Object.keys(S).forEach(k=>growth[k]=(sn[k]-(sp[k]||0)));let grew=Object.entries(growth).sort((a,b)=>b[1]-a[1])[0][0];let stable=Object.keys(S).sort((a,b)=>Math.min(sn[b],sp[b])-Math.min(sn[a],sp[a]))[0];st.result={sn,sp,rn,rp,top:rn[0][0],second:rn[1][0],past:rp[0][0],past2:rp[1][0],grew,stable};renderResult()},550)}
+function mbtiCalc(ans){
+let axes={EI:{E:0,I:0},SN:{S:0,N:0},TF:{T:0,F:0},JP:{J:0,P:0}};
+for(const v of Object.values(ans))axes[v.axis][v.pole]++;
+let type="",detail={};
+for(const ax of ["EI","SN","TF","JP"]){
+let a=ax[0],b=ax[1],tot=axes[ax][a]+axes[ax][b],pa=Math.round(100*axes[ax][a]/tot),pb=100-pa;
+let win=axes[ax][a]>=axes[ax][b]?a:b;type+=win;detail[ax]={a,b,pa,pb,win,total:tot}
+}
+return {type,detail}
+}
+function mbtiSummary(p,n){
+let changed=[],stable=[];
+for(const ax of ["EI","SN","TF","JP"]){if(p.detail[ax].win!==n.detail[ax].win)changed.push(p.detail[ax].win+"→"+n.detail[ax].win);else stable.push(n.detail[ax].win)}
+if(changed.length)return "最明顯的類型轉換出現在 "+changed.join("、")+"；其餘人格軸相對穩定。這描述的是本次回答的行為傾向，不代表人格被固定。";
+return "四個字母方向沒有翻轉，但各軸強度仍可能改變。比起只看四字母，更值得看下面每個軸的比例變化。"
+}
+function finish(){show("processing");prog(96);setTimeout(()=>{
+let sn=scores(st.an),sp=scores(st.ap);if(st.decAns)sn[st.decAns]+=.5;
+let rn=Object.entries(sn).sort((a,b)=>b[1]-a[1]),rp=Object.entries(sp).sort((a,b)=>b[1]-a[1]),growth={};
+Object.keys(S).forEach(k=>growth[k]=(sn[k]-(sp[k]||0)));
+let grew=Object.entries(growth).sort((a,b)=>b[1]-a[1])[0][0],stable=Object.keys(S).sort((a,b)=>Math.min(sn[b],sp[b])-Math.min(sn[a],sp[a]))[0];
+st.result={sn,sp,rn,rp,top:rn[0][0],second:rn[1][0],past:rp[0][0],past2:rp[1][0],grew,stable};
+st.mbti={past:mbtiCalc(st.mbPast),now:mbtiCalc(st.mbNow)};
+renderMbtiResult()
+},550)}
+function renderMbtiResult(){
+let p=st.mbti.past,n=st.mbti.now;$("mbPastType").textContent=p.type;$("mbNowType").textContent=n.type;
+$("mbAxes").innerHTML=["EI","SN","TF","JP"].map(ax=>{
+let pd=p.detail[ax],nd=n.detail[ax];
+return '<div style="margin:14px 0 18px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px"><strong>'+nd.a+' ↔ '+nd.b+'</strong><span style="color:var(--muted)">以前 '+pd.a+' '+pd.pa+' / '+pd.b+' '+pd.pb+' → 現在 '+nd.a+' '+nd.pa+' / '+nd.b+' '+nd.pb+'</span></div><div class="bar" style="height:12px"><div class="fill" style="width:'+nd.pa+'%"></div></div></div>'
+}).join("");
+$("mbSummary").textContent=mbtiSummary(p,n);show("mbtiResult");prog(98)
+}
+function revealSecondLayer(){renderResult()}
 function role(a,b){return S[a].name+"・"+(ROLES[key(a,b)]||"複合型")}
 function story(r){if(r.top==="F"&&r.second==="D")return"你傾向先理解結構，再決定哪些規則值得保留；不是只在系統裡找最佳解，而是必要時重新定義玩法。";if(r.top==="D"&&r.second==="F")return"你從結構與邊界出發，但不把既有規則視為不可改；理解系統，是為了看見重新設計它的可能性。";if(r.top==="E"&&r.second==="F")return"你不只想出新方向，也會把人、資源與流程真正推到新的運作方式上。";if(r.top==="F"&&r.second==="E")return"你先重新定義問題，再重新安排人與資源；你的優勢不只是破局，而是讓新玩法真正落地。";return"你目前最常用的兩種模式是「"+S[r.top].core+"」與「"+S[r.second].core+"」。前者決定你先看哪裡，後者決定你怎麼把選擇推進到現實。"}
 function renderResult(){
@@ -153,10 +263,11 @@ function card(){
 let c=$("canvas"),x=c.getContext("2d"),r=st.result,g=x.createLinearGradient(0,0,1080,1600);g.addColorStop(0,"#151923");g.addColorStop(.55,S[r.top].c);g.addColorStop(1,"#090a0e");x.fillStyle=g;x.fillRect(0,0,1080,1600);
 x.fillStyle="#f5f7fb";x.font='700 34px -apple-system,"PingFang TC"';x.fillText("PATTERN SHIFT",74,92);x.fillStyle="#ffffffaa";x.font='600 27px -apple-system,"PingFang TC"';x.fillText(st.name?st.name.toUpperCase():"PERSONAL PROFILE",74,142);
 x.fillStyle="#fff";x.font='900 90px -apple-system,"PingFang TC"';x.fillText(S[r.top].name,74,330);x.font='700 43px -apple-system,"PingFang TC"';x.fillText(role(r.top,r.second),74,395);
-x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("PAST → NOW",74,520);x.fillStyle="#fff";x.font='800 42px -apple-system,"PingFang TC"';x.fillText(S[r.past].short+" × "+S[r.past2].short+"  →  "+S[r.top].short+" × "+S[r.second].short,74,585);
-x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CORE",74,720);x.fillStyle="#fff";x.font='800 36px -apple-system,"PingFang TC"';x.fillText("穩定核心｜"+S[r.stable].core,74,780);x.fillText("最大成長｜"+S[r.grew].core,74,840);x.fillText("核心副系｜"+S[r.second].name,74,900);
-x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CURRENT DISTRIBUTION",74,1025);let mx=Math.max(...r.rn.map(z=>z[1]));r.rn.forEach((z,i)=>{let y=1080+i*56;x.fillStyle="#fff";x.font='700 24px -apple-system,"PingFang TC"';x.fillText(S[z[0]].short,74,y);x.fillStyle="#ffffff20";x.fillRect(180,y-20,700,18);x.fillStyle="#ffffffcc";x.fillRect(180,y-20,700*z[1]/mx,18);x.fillStyle="#ffffffaa";x.fillText(z[1].toFixed(z[1]%1?1:0),920,y)});
-x.fillStyle="#fff";x.font='700 30px -apple-system,"PingFang TC"';wrap(x,story(r),74,1460,930,42,3);return c
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("MBTI SHIFT",74,500);x.fillStyle="#fff";x.font='800 42px -apple-system,"PingFang TC"';x.fillText(st.mbti.past.type+"  →  "+st.mbti.now.type,74,560);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("NEN PROFILE · PAST → NOW",74,650);x.fillStyle="#fff";x.font='800 42px -apple-system,"PingFang TC"';x.fillText(S[r.past].short+" × "+S[r.past2].short+"  →  "+S[r.top].short+" × "+S[r.second].short,74,710);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CORE",74,805);x.fillStyle="#fff";x.font='800 36px -apple-system,"PingFang TC"';x.fillText("穩定核心｜"+S[r.stable].core,74,865);x.fillText("最大成長｜"+S[r.grew].core,74,925);x.fillText("核心副系｜"+S[r.second].name,74,985);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CURRENT DISTRIBUTION",74,1080);let mx=Math.max(...r.rn.map(z=>z[1]));r.rn.forEach((z,i)=>{let y=1135+i*50;x.fillStyle="#fff";x.font='700 24px -apple-system,"PingFang TC"';x.fillText(S[z[0]].short,74,y);x.fillStyle="#ffffff20";x.fillRect(180,y-20,700,18);x.fillStyle="#ffffffcc";x.fillRect(180,y-20,700*z[1]/mx,18);x.fillStyle="#ffffffaa";x.fillText(z[1].toFixed(z[1]%1?1:0),920,y)});
+x.fillStyle="#fff";x.font='700 30px -apple-system,"PingFang TC"';wrap(x,story(r),74,1480,930,38,3);return c
 }
 function makeCard(){$("cardimg").src=card().toDataURL("image/png");$("modal").classList.add("on")}
 function closeCard(){$("modal").classList.remove("on")}
