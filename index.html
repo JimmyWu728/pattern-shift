@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0b0c10">
+<title>Pattern Shift</title>
+<style>
+:root{--bg:#0b0c10;--panel:#15171d;--panel2:#1c1f27;--text:#f5f7fb;--muted:#a8aebb;--line:rgba(255,255,255,.1);--accent:#d8e2ff;--accentText:#11141b;--st:max(20px,env(safe-area-inset-top));--sb:max(18px,env(safe-area-inset-bottom))}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang TC",system-ui,sans-serif}body{min-height:100dvh;overscroll-behavior:none}.app{min-height:100dvh;max-width:720px;margin:auto;padding:var(--st) 18px var(--sb);display:flex;flex-direction:column}.top{height:42px;display:flex;align-items:center;gap:12px}.brand{font-size:15px;font-weight:750}.track{flex:1;height:6px;background:#ffffff12;border-radius:99px;overflow:hidden}.prog{height:100%;width:0;background:linear-gradient(90deg,#bcd0ff,#d9c7ff);transition:.25s}.screen{display:none;flex:1}.screen.on{display:flex;flex-direction:column;animation:fade .18s ease}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1}}.center{justify-content:center}.ey{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:750}h1{font-size:38px;line-height:1.05;letter-spacing:-.04em;margin:12px 0 16px}h2{font-size:28px;line-height:1.18;letter-spacing:-.025em;margin:10px 0 12px}p{font-size:16px;line-height:1.55;color:var(--muted);margin:0 0 14px}.mark{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,#252a36,#101217);border:1px solid var(--line);font-weight:850;font-size:28px}.sp{flex:1}.cta{width:100%;min-height:54px;border:0;border-radius:18px;background:var(--accent);color:var(--accentText);font-size:17px;font-weight:800;padding:0 16px;touch-action:manipulation}.cta:active,.choice:active{transform:scale(.985)}.cta.alt{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.note{font-size:12px;color:#808899;line-height:1.45;margin-top:13px}.box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;margin:8px 0}.box strong{display:block;margin-bottom:6px}.stack{display:grid;gap:12px}.field{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.field input{width:100%;background:transparent;border:0;outline:0;color:var(--text);font-size:18px}.seg{display:grid;grid-template-columns:1fr 1fr;gap:9px}.seg button{min-height:46px;border-radius:14px;border:1px solid var(--line);background:var(--panel2);color:var(--text)}.seg button.sel{background:var(--accent);color:var(--accentText);font-weight:800}.meta{display:flex;justify-content:space-between;margin:8px 0 14px;font-size:13px;color:var(--muted)}.tabs{display:flex;gap:8px;margin-bottom:16px}.pill{padding:8px 12px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:13px;color:var(--muted)}.pill.sel{background:#eef3ff;color:#11151d;border-color:transparent;font-weight:800}.q{font-size:24px;line-height:1.32;font-weight:800;letter-spacing:-.02em;margin:6px 0 20px}.choices{display:grid;gap:12px}.choice{width:100%;min-height:78px;text-align:left;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:17px 18px;font-size:16px;line-height:1.43}.choice.sel{background:#202631;border-color:#d8e2ffcc}.hint{font-size:13px;color:#808899;margin-top:14px}.reveal{display:grid;gap:14px;padding:8px 0 10px}.hero{border-radius:28px;min-height:240px;padding:24px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(145deg,#232a36,#101217)}.hero .sys{font-size:42px;font-weight:900;letter-spacing:-.045em;margin:5px 0 2px}.hero .role{font-size:18px;font-weight:750;color:#d7deeb}.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.badge{font-size:12px;padding:7px 9px;border-radius:99px;background:#ffffff12;border:1px solid var(--line)}.panel{border-radius:22px;background:var(--panel);border:1px solid var(--line);padding:17px}.pt{font-size:13px;color:var(--muted);font-weight:750;margin-bottom:12px}.evo{display:grid;grid-template-columns:1fr 28px 1fr;gap:8px;align-items:center}.evo>div:not(.arrow){background:#101218;border:1px solid var(--line);border-radius:16px;padding:13px}.evo span{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.arrow{text-align:center;color:#747c8c;font-size:20px}.row{display:grid;grid-template-columns:58px 1fr 34px;gap:10px;align-items:center;margin:10px 0}.bar{height:8px;background:#262a33;border-radius:99px;overflow:hidden}.fill{height:100%;background:#dce6ff;border-radius:99px}.quote{font-size:17px;line-height:1.5;font-weight:700}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actions .cta{font-size:15px}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:#000d;padding:calc(var(--st) + 10px) 14px calc(var(--sb) + 10px);z-index:9}.modal.on{display:flex}.modalcard{width:min(100%,430px);max-height:100%;overflow:auto;background:#111319;border:1px solid var(--line);border-radius:24px;padding:14px}.modal img{width:100%;display:block;border-radius:18px}.modalbtns{display:grid;gap:10px;margin-top:12px}
+@media(min-width:700px){h1{font-size:48px}.q{font-size:30px}.choice{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand">Pattern Shift</div><div class="track"><div id="prog" class="prog"></div></div></div>
+
+<section id="intro" class="screen on center">
+<div class="mark">PS</div><div class="ey" style="margin-top:24px">Decision & Personality</div>
+<h1>你現在的行動方式，<br>和以前一樣嗎？</h1>
+<p>這是一個關於人格變化與決策模式的互動測驗。沒有標準答案，請選最接近你真實反應的選項。</p>
+<div class="box"><strong>回答方式</strong><p style="margin:0">核心題會依序問「現在的你」與「以前的你」。請依直覺回答，不必追求前後一致。</p></div>
+<div class="sp"></div><button class="cta" onclick="goSetup()">開始</button><div class="note">約 4–6 分鐘｜iPhone 直式操作優先</div>
+</section>
+
+<section id="setup" class="screen">
+<div style="margin-top:22px"><div class="ey">Before we start</div><h2>先留下一點背景</h2><p>這些資料只用來描述你的變化。</p></div>
+<div class="stack">
+<div class="field"><label>名字／暱稱（可留白）</label><input id="nm" maxlength="18" placeholder="例如：Alex"></div>
+<div class="field"><label>以前的 MBTI（可留白）</label><input id="mp" maxlength="4" placeholder="例如：INTJ"></div>
+<div class="field"><label>現在的 MBTI（可留白）</label><input id="mn" maxlength="4" placeholder="例如：ENTJ"></div>
+<div class="field"><label>「以前」大約指多久以前？</label><div class="seg"><button id="y3" class="sel" onclick="setPast(3)">約 3 年前</button><button id="y5" onclick="setPast(5)">約 5 年前</button></div></div>
+</div>
+<div class="sp"></div><button class="cta" onclick="start()">進入測驗</button><div class="note">請全程用同一個人生階段理解「以前」。</div>
+</section>
+
+<section id="quiz" class="screen">
+<div class="meta"><div id="phase"></div><div id="num"></div></div>
+<div id="tabs" class="tabs"></div><div id="question" class="q"></div><div id="choices" class="choices"></div><div id="hint" class="hint"></div><div class="sp"></div>
+</section>
+
+<section id="checkpoint" class="screen center">
+<div class="ey">Cross-check</div><h2 id="cpt">再確認幾個情境</h2><p id="cpp">接下來會用不同情境確認前面的輪廓是否穩定。</p>
+<div class="box"><strong>不用刻意維持一致</strong><p style="margin:0">如果你本來就會依情境切換，答案不同是正常的。</p></div><div class="sp"></div><button id="cpbtn" class="cta">繼續</button>
+</section>
+
+<section id="processing" class="screen center"><div class="mark">···</div><div class="ey" style="margin-top:24px">Analysis</div><h2>正在整理你的模式</h2><p>比較現在、過去與複驗結果。</p></section>
+
+<section id="result" class="screen"><div class="reveal">
+<div class="ey">Second Layer Unlocked</div>
+<div class="box"><strong>你剛才做的不只是人格變化測驗。</strong><p style="margin:0">第二層把你的決策取捨映射到《獵人》的六種念系人格框架。這是娛樂性人格模型，不是心理診斷。</p></div>
+<div id="hero" class="hero"><div class="ey">CURRENT PROFILE</div><div id="sys" class="sys">—</div><div id="role" class="role">—</div><div id="badges" class="badges"></div></div>
+<div class="panel"><div class="pt">以前 → 現在</div><div class="evo"><div><span>以前</span><strong id="pastTop">—</strong></div><div class="arrow">→</div><div><span>現在</span><strong id="nowTop">—</strong></div></div></div>
+<div class="panel"><div class="pt">六系分布（現在）</div><div id="bars"></div></div>
+<div class="panel"><div class="pt">你的變化</div><div id="growth" class="quote"></div></div>
+<div class="panel"><div class="pt">角色敘事</div><div id="story" class="quote"></div></div>
+<div class="panel"><div class="pt">複驗一致度</div><div id="cons" class="quote"></div><p id="consnote" style="margin-top:8px;margin-bottom:0"></p></div>
+<div class="actions"><button class="cta" onclick="makeCard()">分享念系卡片</button><button class="cta alt" onclick="location.reload()">重新測一次</button></div>
+<div class="note">卡片不會顯示逐題答案。</div>
+</div></section>
+</div>
+
+<div id="modal" class="modal"><div class="modalcard"><img id="cardimg"><div class="modalbtns"><button class="cta" onclick="nativeShare()">使用 iPhone 分享</button><button class="cta alt" onclick="closeCard()">關閉</button><div class="note" style="text-align:center">若分享選單未出現，可長按圖片加入照片。</div></div></div></div>
+<canvas id="canvas" width="1080" height="1600" hidden></canvas>
+
+<script>
+const S={
+A:{name:"強化系",short:"強化",core:"穩定輸出",c:"#6f7788"},
+B:{name:"變化系",short:"變化",core:"適應與轉換",c:"#7b6e9a"},
+C:{name:"放出系",short:"放出",core:"直接投射",c:"#9a6e5b"},
+D:{name:"具現化系",short:"具現",core:"結構建模",c:"#5d7f9f"},
+E:{name:"操作系",short:"操作",core:"協調與槓桿",c:"#5e8e70"},
+F:{name:"特質系",short:"特質",core:"重定義問題",c:"#94677f"}
+};
+const Q=[
+["A","B","臨時出現一個沒預期到的障礙，你更自然的第一步是？","先把既有方法做得更扎實，用更穩定的輸出去突破。","先換一種做法，快速試出哪個變化最有效。"],
+["A","C","事情已經拖了一段時間，你更傾向怎麼推進？","把注意力收回自己能控制的部分，直接提高完成度。","把訊息與行動往外推出去，讓更多人或資源開始反應。"],
+["A","D","面對一個複雜任務，你更不願意犧牲哪一個？","持續執行的強度與可靠度。","對結構、細節與規格的掌握。"],
+["A","E","如果團隊進度落後，你第一個會補哪裡？","自己先補上最關鍵的工作量，讓進度重新動起來。","重新配置人與資源，把整體運作效率拉起來。"],
+["A","F","當目標很難達成時，你更可能優先做什麼？","先提高自己的能力與投入，看看能否把目標做成。","先確認目標本身是否值得，必要時重新定義要解的問題。"],
+["B","C","進入陌生環境時，你比較像哪一種？","邊觀察邊調整自己，很快找到適合當下的節奏。","主動往外接觸，直接用互動與反應摸清環境。"],
+["B","D","拿到一個你沒用過的新工具，你通常先？","直接試幾種不同玩法，從反應中理解它。","先弄清楚它怎麼構成、規則與限制在哪裡。"],
+["B","E","原本的方法失效時，你更自然的反應是？","自己先變，換策略、節奏或切入方式。","調整流程、角色或資源配置，讓整體系統重新運作。"],
+["B","F","玩高自由度遊戲時，哪件事更吸引你？","把現有機制玩出很多不同變化。","找出遊戲沒要求你做、但其實可以成立的新玩法。"],
+["C","D","如果要把一個想法真正做出影響，你會更重視？","讓它快速離開自己，直接被別人看見、使用或回應。","先把它整理成清楚、可重複、可被理解的形式。"],
+["C","E","需要讓多人一起行動時，你更擅長從哪裡開始？","直接把方向與訊號傳出去，快速形成共同動作。","先安排角色、節點與協作方式，再驅動整體。"],
+["C","F","遇到僵局時，你比較容易產生哪種衝動？","先打開外部通道，找新的人、新資源或新場域。","先懷疑我們是不是根本在解錯問題。"],
+["D","E","要把一件事做成長期可運作，你更看重？","把方法、規格與結構定義得夠清楚。","讓人、流程與資源能照這套結構持續運轉。"],
+["D","F","面對一套不理想的規則，你更可能？","找出規則的邏輯與邊界，在裡面建立更好的解法。","重新問一次：這套規則是不是本來就該改。"],
+["E","F","團隊卡住時，你更可能先動哪一層？","調整分工、流程、權責或節點，讓系統恢復流動。","重新定義成功條件，看看是不是整套玩法需要換掉。"]
+];
+const V=[
+["D","F","你接手一個規則很多、歷史包袱很重的系統，你會先？","把規則、例外與相依關係梳理清楚，再找最有效的解法。","先問哪些規則其實已經沒有存在的必要，再決定怎麼重做。"],
+["E","F","大家都很努力，但結果仍然不好。你更想先確認？","是不是協作方式、責任分配或資源調度出了問題。","是不是大家其實朝著一個不值得的目標努力。"],
+["A","B","你只有一次補救機會時，哪種做法更像你？","選最可靠的方法，把成功率做到最高。","根據現場反應快速改打法，不把自己綁死。"],
+["C","E","要在很短時間內推動一群人，你更依賴？","清楚、直接、能穿透層級的訊號與表達。","抓住關鍵人物與節點，讓影響沿著結構擴散。"]
+];
+const ROLES={AB:"適應輸出型",AC:"直接突破型",AD:"精密建構型",AE:"現場統籌型",AF:"目標改寫型",BC:"機動投射型",BD:"模型變奏型",BE:"彈性編排型",BF:"邊界探索型",CD:"外部架構型",CE:"影響傳導型",CF:"破局投射型",DE:"系統運作型",DF:"系統重構型",EF:"規則編排型"};
+let st={past:3,order:[],i:0,time:"now",an:{},ap:{},vi:0,va:[],cons:0,decide:false,decPair:null,decAns:null,result:null,name:""};
+const $=id=>document.getElementById(id), key=(a,b)=>[a,b].sort().join("");
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("on"));$(id).classList.add("on");scrollTo(0,0)}
+function prog(n){$("prog").style.width=n+"%"}
+function shuffle(a){a=[...a];for(let i=a.length-1;i;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function goSetup(){show("setup");prog(2)}
+function setPast(n){st.past=n;$("y3").classList.toggle("sel",n===3);$("y5").classList.toggle("sel",n===5)}
+function start(){st.name=$("nm").value.trim();st.order=shuffle(Q.map((_,i)=>i));show("quiz");renderCore()}
+function renderCore(){
+let qi=st.order[st.i],q=Q[qi],past=st.time==="past";
+$("phase").textContent="核心取捨";$("num").textContent=(st.i+1)+" / 15";
+$("tabs").innerHTML='<div class="pill '+(!past?"sel":"")+'">現在的我</div><div class="pill '+(past?"sel":"")+'">'+st.past+'年前的我</div>';
+$("question").textContent=q[2];$("hint").textContent=past?"用同一個情境回答以前的你。":"先回答現在的你。";
+let opts=shuffle([[q[0],q[3]],[q[1],q[4]]]);$("choices").innerHTML="";
+opts.forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>pickCore(qi,o[0],b);$("choices").appendChild(b)});
+prog(5+((st.i+(past?.5:0))/15)*66)
+}
+function pickCore(qi,k,b){b.classList.add("sel");setTimeout(()=>{if(st.time==="now"){st.an[qi]=k;st.time="past";renderCore()}else{st.ap[qi]=k;st.time="now";st.i++;if(st.i===15){show("checkpoint");prog(72);$("cpbtn").onclick=startVal}else renderCore()}},100)}
+function startVal(){st.vi=0;st.va=[];show("quiz");renderVal()}
+function renderVal(){
+let v=V[st.vi];$("phase").textContent="情境複驗";$("num").textContent=(st.vi+1)+" / 4";$("tabs").innerHTML='<div class="pill sel">現在的我</div>';
+$("question").textContent=v[2];$("hint").textContent="不要回想前面的答案，照這個情境本身選。";$("choices").innerHTML="";
+shuffle([[v[0],v[3]],[v[1],v[4]]]).forEach(o=>{let b=document.createElement("button");b.className="choice";b.textContent=o[1];b.onclick=()=>{b.classList.add("sel");st.va.push(o[0]);setTimeout(()=>{st.vi++;st.vi===4?afterVal():renderVal()},100)};$("choices").appendChild(b)});
+prog(73+(st.vi/4)*13)
+}
+function scores(ans){let s={A:0,B:0,C:0,D:0,E:0,F:0};Object.values(ans).forEach(k=>s[k]++);return s}
+function afterVal(){
+let m=0;V.forEach((v,i)=>{let qi=Q.findIndex(q=>key(q[0],q[1])===key(v[0],v[1]));if(st.an[qi]===st.va[i])m++});st.cons=m/4;
+let sn=scores(st.an),r=Object.entries(sn).sort((a,b)=>b[1]-a[1]);st.decide=(r[0][1]-r[1][1]<=1)||st.cons<.75;
+if(st.decide){st.decPair=[r[0][0],r[1][0]];$("cpt").textContent="最後再確認 1 題";$("cpp").textContent=st.cons<.75?"你的選擇有明顯情境切換。最後用一題有代價的選擇確認核心偏好。":"你的前兩個傾向非常接近。最後用一題做區分。";show("checkpoint");$("cpbtn").onclick=startDec;prog(88)}else finish()
+}
+function startDec(){
+let a=st.decPair[0],b=st.decPair[1],base=Q.find(q=>key(q[0],q[1])===key(a,b));
+show("quiz");$("phase").textContent="最後確認";$("num").textContent="1 / 1";$("tabs").innerHTML='<div class="pill sel">只能選一個</div>';
+$("question").textContent="如果只能保留其中一種能力，你更不願意放棄哪一個？";$("hint").textContent="沒有折衷選項。";$("choices").innerHTML="";
+let ta=base[0]===a?base[3]:base[4],tb=base[0]===b?base[3]:base[4];
+shuffle([[a,ta],[b,tb]]).forEach(o=>{let x=document.createElement("button");x.className="choice";x.textContent=o[1];x.onclick=()=>{st.decAns=o[0];finish()};$("choices").appendChild(x)});prog(92)
+}
+function finish(){show("processing");prog(96);setTimeout(()=>{let sn=scores(st.an),sp=scores(st.ap);if(st.decAns)sn[st.decAns]+=.5;let rn=Object.entries(sn).sort((a,b)=>b[1]-a[1]),rp=Object.entries(sp).sort((a,b)=>b[1]-a[1]);let growth={};Object.keys(S).forEach(k=>growth[k]=(sn[k]-(sp[k]||0)));let grew=Object.entries(growth).sort((a,b)=>b[1]-a[1])[0][0];let stable=Object.keys(S).sort((a,b)=>Math.min(sn[b],sp[b])-Math.min(sn[a],sp[a]))[0];st.result={sn,sp,rn,rp,top:rn[0][0],second:rn[1][0],past:rp[0][0],past2:rp[1][0],grew,stable};renderResult()},550)}
+function role(a,b){return S[a].name+"・"+(ROLES[key(a,b)]||"複合型")}
+function story(r){if(r.top==="F"&&r.second==="D")return"你傾向先理解結構，再決定哪些規則值得保留；不是只在系統裡找最佳解，而是必要時重新定義玩法。";if(r.top==="D"&&r.second==="F")return"你從結構與邊界出發，但不把既有規則視為不可改；理解系統，是為了看見重新設計它的可能性。";if(r.top==="E"&&r.second==="F")return"你不只想出新方向，也會把人、資源與流程真正推到新的運作方式上。";if(r.top==="F"&&r.second==="E")return"你先重新定義問題，再重新安排人與資源；你的優勢不只是破局，而是讓新玩法真正落地。";return"你目前最常用的兩種模式是「"+S[r.top].core+"」與「"+S[r.second].core+"」。前者決定你先看哪裡，後者決定你怎麼把選擇推進到現實。"}
+function renderResult(){
+let r=st.result;$("sys").textContent=S[r.top].name;$("role").textContent=role(r.top,r.second);$("hero").style.background="radial-gradient(circle at 82% 12%,#ffffff18,transparent 30%),linear-gradient(145deg,"+S[r.top].c+",#101217)";
+$("badges").innerHTML='<div class="badge">核心副系｜'+S[r.second].name+'</div><div class="badge">穩定核心｜'+S[r.stable].core+'</div><div class="badge">最大成長｜'+S[r.grew].short+'</div>';
+$("pastTop").textContent=S[r.past].short+" × "+S[r.past2].short;$("nowTop").textContent=S[r.top].short+" × "+S[r.second].short;
+let mx=Math.max(...r.rn.map(x=>x[1]));$("bars").innerHTML=r.rn.map(x=>'<div class="row"><div>'+S[x[0]].short+'</div><div class="bar"><div class="fill" style="width:'+Math.max(5,100*x[1]/mx)+'%"></div></div><div>'+x[1].toFixed(x[1]%1?1:0)+'</div></div>').join("");
+$("growth").textContent='你最穩定的核心是「'+S[r.stable].core+'」，相較過去成長最明顯的是「'+S[r.grew].core+'」。';$("story").textContent=story(r);
+let c=st.cons;$("cons").textContent=(c>=.75?"高":c>=.5?"中等":"較低")+"（"+Math.round(c*100)+"%）";$("consnote").textContent=c>=.75?"不同情境下的核心取捨大致穩定。":c>=.5?"你有明顯情境切換，結果已加入最後確認題。":"不同情境下變化較大，這份結果更適合視為目前狀態。";
+show("result");prog(100)
+}
+function wrap(ctx,t,x,y,w,lh,max=4){let l="",arr=[];for(let ch of [...t]){let z=l+ch;if(ctx.measureText(z).width>w&&l){arr.push(l);l=ch}else l=z}if(l)arr.push(l);arr.slice(0,max).forEach((z,i)=>ctx.fillText(z,x,y+i*lh))}
+function card(){
+let c=$("canvas"),x=c.getContext("2d"),r=st.result,g=x.createLinearGradient(0,0,1080,1600);g.addColorStop(0,"#151923");g.addColorStop(.55,S[r.top].c);g.addColorStop(1,"#090a0e");x.fillStyle=g;x.fillRect(0,0,1080,1600);
+x.fillStyle="#f5f7fb";x.font='700 34px -apple-system,"PingFang TC"';x.fillText("PATTERN SHIFT",74,92);x.fillStyle="#ffffffaa";x.font='600 27px -apple-system,"PingFang TC"';x.fillText(st.name?st.name.toUpperCase():"PERSONAL PROFILE",74,142);
+x.fillStyle="#fff";x.font='900 90px -apple-system,"PingFang TC"';x.fillText(S[r.top].name,74,330);x.font='700 43px -apple-system,"PingFang TC"';x.fillText(role(r.top,r.second),74,395);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("PAST → NOW",74,520);x.fillStyle="#fff";x.font='800 42px -apple-system,"PingFang TC"';x.fillText(S[r.past].short+" × "+S[r.past2].short+"  →  "+S[r.top].short+" × "+S[r.second].short,74,585);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CORE",74,720);x.fillStyle="#fff";x.font='800 36px -apple-system,"PingFang TC"';x.fillText("穩定核心｜"+S[r.stable].core,74,780);x.fillText("最大成長｜"+S[r.grew].core,74,840);x.fillText("核心副系｜"+S[r.second].name,74,900);
+x.fillStyle="#ffffffaa";x.font='700 26px -apple-system,"PingFang TC"';x.fillText("CURRENT DISTRIBUTION",74,1025);let mx=Math.max(...r.rn.map(z=>z[1]));r.rn.forEach((z,i)=>{let y=1080+i*56;x.fillStyle="#fff";x.font='700 24px -apple-system,"PingFang TC"';x.fillText(S[z[0]].short,74,y);x.fillStyle="#ffffff20";x.fillRect(180,y-20,700,18);x.fillStyle="#ffffffcc";x.fillRect(180,y-20,700*z[1]/mx,18);x.fillStyle="#ffffffaa";x.fillText(z[1].toFixed(z[1]%1?1:0),920,y)});
+x.fillStyle="#fff";x.font='700 30px -apple-system,"PingFang TC"';wrap(x,story(r),74,1460,930,42,3);return c
+}
+function makeCard(){$("cardimg").src=card().toDataURL("image/png");$("modal").classList.add("on")}
+function closeCard(){$("modal").classList.remove("on")}
+async function nativeShare(){let c=card(),blob=await new Promise(r=>c.toBlob(r,"image/png",.95)),f=new File([blob],"pattern-shift-card.png",{type:"image/png"});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({title:"我的人格變化結果",text:"我剛完成了 Pattern Shift。",files:[f]})}catch(e){}}}
+</script>
+</body></html>
